@@ -1,12 +1,17 @@
 /**
+ * 
+ * Author: Hoang Nham
+ * Email: hoangnham01@gmail.com
  * Created by HoangNham on 2/20/14.
+ * 
  */
-
+ 
 (function ($) {
+    'use strict';
     $.fn.extend({
         toSlug: function (options) {
             var defaultVal = {
-                parent: null
+                from: null
             };
             var opts = $.extend(defaultVal, options);
 
@@ -21,9 +26,9 @@
                 return str.replace(/[^a-z0-9 -]/g, '-').replace(/\s+/g, '-').replace(/-+/g, '-').replace(/^\-+|\-+$/g, "");
             }
             return this.each(function (countObject, obj) {
-                if(opts.parent !== null){
-                    $(opts.parent).keyup(function (){
-                        var str = $(opts.parent).val();
+                if(opts.from !== null){
+                    $(opts.from).keyup(function (){
+                        var str = $(opts.from).val();
                         $(obj).val(convertToSlug(str));
                     });
                 }
@@ -36,3 +41,6 @@
         }
     });
 })(jQuery);
+$(document).ready(function(){
+    $('#slug').toSlug({from: '#from-slug'});
+});
